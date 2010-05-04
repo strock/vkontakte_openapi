@@ -2,8 +2,8 @@ require 'digest/md5'
 require 'json'
 
 module VKontakte
-    class VKontakteNotAuthorizedException < StandardError
-    end
+	class VKontakteNotAuthorizedException < StandardError
+	end
 
 	class OpenAPI
 		API_ENDPOINT = "http://api.vkontakte.ru/api.php"
