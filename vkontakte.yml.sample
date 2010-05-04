@@ -1,0 +1,9 @@
+# Put your application id and passwords in corresponding sections down here.
+
+development:
+  app_id: 
+  app_password: 
+
+production:
+  app_id: 
+  app_password: 
