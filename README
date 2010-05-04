@@ -1,0 +1,37 @@
+Vkontakte-openapi
+=================
+
+This is a simple Rails plugin for integration with vkontakte.ru's OpenAPI. It allows you to call vkontakte's API methods from your Rails application
+
+
+Example
+=======
+
+In controller:
+
+open_api = VKontakte::OpenAPI.new vk_cookie
+open_api.getProfiles({:uids => 1439876})
+=> [{"uid"=>1439876, "last_name"=>"Sect", "first_name"=>"My"}]
+
+How to use
+==========
+
+First, you need to configure a plugin. To do so, you must modify your application's config/vkontakte.yml ant provide your application's id and secure code in corresponding environment's section.
+
+After that you'll be able to use vk_login helper in your views, some helper methods in your views and controlers, and VKontakte::OpenAPI class anywhere else. vk_login helper simply generates "Log in with vkontakte" button. It takes path to return user to after login (default is '/sessions/vk'). After successful login there will be special vkontakte's cookie, which will be used for calling API methods and veryfying whether vkontakte user is logged in.
+
+Following utility methods are provided to controllers:
+vk_cookie - returns parsed cookie set by vkontakte.ru
+openapi_sid - vkontakte session id (I think so)
+openapi_user - vkontakte user ID
+openapi_logout - clears vkontakte cookie
+
+VKontakte::OpenAPI is a class that makes API calls to vkontakte.ru. Its constructor needs that cookie you can retrieve by calling vk_cookie helper method. After it is initialized, you can start to call API methods by simply calling same methods on object of VKontakte::OpenAPI class (for methods that have '.' in their names, substitute dot with underscore). Such calls return Ruby hashes as it's shown in example above.
+
+Known issues
+============
+
+1) There's no error handling at all - vkontakte error messages will be returned just as usual API call results.
+2) Some calls don't work and return something like "Unknown error" from vkontakte.ru's side. Such calls don't also work when using vkontakte's own JS API implementation, so maybe it's not my problem at all.
+
+Copyright (c) 2010 Strock, released under the MIT license
